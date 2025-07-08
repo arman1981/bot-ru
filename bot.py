@@ -1,4 +1,4 @@
-from telethon import TelegramClient, events
+from telethon import TelegramClient, events, Button
 import os
 
 API_ID = int(os.environ.get("API_ID"))
@@ -9,8 +9,11 @@ bot = TelegramClient("bot", API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
 @bot.on(events.NewMessage(pattern="/start"))
 async def handler(event):
-    await event.respond("👋 Привет! Это AI-Сетевик. Нажми на кнопку ниже:", buttons=[
-        [event.button.url("🔗 Перейти в Mini App", "https://teambot.pro")]
-    ])
+    await event.respond(
+        "👋 Привет! Это AI-Сетевик. Нажми на кнопку ниже:",
+        buttons=[[
+            Button.url("🔗 Перейти в Mini App", "https://teambot.pro")
+        ]]
+    )
 
 bot.run_until_disconnected()
